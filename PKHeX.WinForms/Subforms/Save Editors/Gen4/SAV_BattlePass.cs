@@ -71,6 +71,8 @@ public partial class SAV_BattlePass : Form
     #region Combo Boxes
     private void SetupComboBoxes()
     {
+        loading = true;
+
         CB_TrainerTitle.InitializeBinding();
         CB_Model.InitializeBinding();
         CB_SkinColor.InitializeBinding();
@@ -97,6 +99,8 @@ public partial class SAV_BattlePass : Form
         CB_PassDesign.DataSource = Util.GetCBList(PassDesigns);
         Main.SetCountrySubRegion(CB_Country, "gen4_countries");
         CB_Language.DataSource = Languages;
+
+        loading = false;
     }
 
     private List<ComboItem> GetTrainerTitles()

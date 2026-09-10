@@ -150,7 +150,7 @@ public sealed class BattlePass(Memory<byte> raw)
     private Span<byte> GetPartySpan(int index) => Data.Slice(GetPartyOffset(index), PokeSize);
     public BK4 GetPartySlotAtIndex(int index)
     {
-        var data = GetPartySpan(index).ToArray();
+        var data = GetPartySpan(index)[..^4].ToArray();
         PokeCrypto.Decrypt4BE(data);
         return new BK4(data);
     }
