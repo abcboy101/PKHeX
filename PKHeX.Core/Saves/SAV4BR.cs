@@ -424,6 +424,11 @@ public sealed class SAV4BR : SaveFile, IBoxDetailName
             Data[0x128C8] = (byte)(value & 0xFF);
         }
     }
+
+    /// <summary>
+    /// Determines Mysterial's team, based on the version of the connected DS game.
+    /// </summary>
+    public MysterialTeamVersion MysterialTeam { get => (MysterialTeamVersion)Data[0x128EF]; set => Data[0x128EF] = (byte)value; }
     #endregion
 
     #region Storage
@@ -641,4 +646,11 @@ public sealed class SAV4BR : SaveFile, IBoxDetailName
         => StringConverter4GC.LoadStringUnicodeBR(data, destBuffer);
     public override int SetString(Span<byte> destBuffer, ReadOnlySpan<char> value, int maxLength, StringConverterOption option)
         => StringConverter4GC.SetStringUnicodeBR(value, destBuffer, maxLength, option);
+}
+
+public enum MysterialTeamVersion : byte
+{
+    Initial = 0x00,
+    Diamond = 0x04, // Palkia (also Pt/HG/SS)
+    Pearl = 0x18, // Dialga
 }
